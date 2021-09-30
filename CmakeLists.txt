@@ -1,0 +1,14 @@
+# To find the cmake
+cmake_minimum_required(VERSION 3.5)
+
+# Set the project name
+project (hello_cmake)
+
+# Compile flags
+set(CMAKE_C_FLAGS "-F/Library/Frameworks -framework Appkit -framework SDL2 -framework SDL2_ttf")
+
+# Src files
+file(GLOB SOURCES "src/*.m")
+
+# Add an executable
+add_executable(app ${SOURCES})

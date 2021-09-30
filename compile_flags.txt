@@ -1,0 +1,2 @@
+-xobjective-c
+-F/Library/Frameworks
