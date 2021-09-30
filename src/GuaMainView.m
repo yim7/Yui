@@ -1,7 +1,9 @@
 #import "GuaMainView.h"
+#import "GuaApp.h"
 #import "GuaView.h"
 #import "GuaWindow.h"
 #import "SDL2/SDL.h"
+#import "SDL2_ttf/SDL_ttf.h"
 
 @interface
 GuaMainView ()
@@ -40,7 +42,7 @@ GuaMainView ()
 
 - (void)keyboardEvent:(SDL_Event *)event {
     for (GuaView *view in self.elements) {
-        [view mouseEvent:event];
+        [view keyboardEvent:event];
     }
 }
 
