@@ -6,7 +6,8 @@
 
 // 这是 extension 语法
 // 用来定义一些内部属性和方法，只能在本文件中可见
-@interface GuaWindow ()
+@interface
+GuaWindow ()
 
 @property SDL_Window *window;
 @property BOOL quit;
@@ -64,6 +65,7 @@
 }
 
 - (void)run {
+    SDL_StartTextInput();
     while (!self.quit) {
         // 更新事件，调用 view 的事件处理函数
         [self updateEvents];
@@ -79,8 +81,11 @@
 
         // 把画好的东西显示到窗口里
         SDL_RenderPresent(self.renderer);
+
+        [self tick];
     }
     // Event loop is complete, so close the window.
+    SDL_StopTextInput();
     [self destroy];
 }
 
@@ -99,6 +104,8 @@
             [self.rootView mouseEvent:&event];
         } else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
             [self.rootView keyboardEvent:&event];
+        } else if (event.type == SDL_TEXTINPUT || event.type == SDL_TEXTEDITING) {
+            [self.rootView textInputEvent:&event];
         } else {
             // todo 其他的事件都暂不处理
         }

@@ -36,7 +36,7 @@ GuaInput ()
 
 - (void)rendererText {
     const char *text = self.text.UTF8String;
-    NSLog(@"input text: <%s>", text);
+    // NSLog(@"input text: <%s>", text);
     // 绘制字体，surface 转 texture 是画字体的套路
     GuaRect frame = self.frame;
     SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(self.font, text, self.textColor, frame.w);
@@ -108,22 +108,30 @@ GuaInput ()
     }
 
     if (event->type == SDL_KEYDOWN) {
-        const char *key = SDL_GetKeyName(event->key.keysym.sym);
-        NSString *input = [NSString stringWithUTF8String:key];
-        input = [input lowercaseString];
-        NSLog(@"key down, %@", input);
-        if ([input length] == 1) {
-            self.text = [self.text stringByAppendingString:input];
-        } else if ([input isEqualToString:@"return"]) {
+        SDL_KeyCode key = event->key.keysym.sym;
+        // NSLog(@"keyboard <%d> <%d>", key, SDLK_KP_ENTER);
+        if (key == SDLK_RETURN) {
+            NSLog(@"enter 换行");
             self.text = [self.text stringByAppendingString:@"\n"];
-        } else if ([input isEqualToString:@"backspace"]) {
+        } else if (key == SDLK_BACKSPACE) {
             if ([self.text length]) {
                 self.text = [self.text substringToIndex:self.text.length - 1];
             }
         }
         [self rendererText];
-    } else if (event->type == SDL_TEXTINPUT) {
-        NSLog(@"text input, %s", event->text.text);
     }
 }
+
+- (void)textInputEvent:(SDL_Event *)event {
+    if (!self.focus) {
+        return;
+    }
+    if (event->type == SDL_TEXTINPUT) {
+        NSString *input = [NSString stringWithUTF8String:event->text.text];
+        NSLog(@"IME input text <%@>", input);
+        self.text = [self.text stringByAppendingString:input];
+        [self rendererText];
+    }
+}
+
 @end

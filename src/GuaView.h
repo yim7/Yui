@@ -20,6 +20,8 @@
 
 - (void)keyboardEvent:(SDL_Event *)event;
 
+- (void)textInputEvent:(SDL_Event *)event;
+
 - (void)drawRect:(GuaRect)rect;
 
 - (void)drawRect:(GuaRect)rect color:(GuaColor)color;

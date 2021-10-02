@@ -48,6 +48,10 @@ GuaView ()
 - (void)keyboardEvent:(SDL_Event *)event {
 }
 
+- (void)textInputEvent:(SDL_Event *)event {
+    
+}
+
 - (void)drawRect:(GuaRect)rect {
     GuaApp *app = [GuaApp sharedApp];
     SDL_RenderFillRect(app.renderer, &rect);

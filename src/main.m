@@ -15,13 +15,13 @@ main(int argc, const char *argv[]) {
     // window 创建后才能创建 view
     // 因为现在的 sdl2 绘图依赖 window 的全局状态
     GuaMainView *root = [GuaMainView newWithFrame:frame];
-    GuaLabel *label = [GuaLabel newWithFrame:GuaMakeRect(250, 50, 200, 100)
-                                        text:@"标题栏"
-                                       color:GuaMakeColor(255, 0, 0, 255)];
-    [root addSubView:label];
-    GuaButton *button = [GuaButton newWithFrame:GuaMakeRect(450, 400, 100, 50)];
+    // GuaLabel *label = [GuaLabel newWithFrame:GuaMakeRect(250, 50, 200, 100)
+    //                                     text:@"标题栏"
+    //                                    color:GuaMakeColor(255, 0, 0, 255)];
+    // [root addSubView:label];
+    GuaButton *button = [GuaButton newWithFrame:GuaMakeRect(400, 300, 100, 50)];
     [root addSubView:button];
-    GuaInput *input = [GuaInput newWithFrame:GuaMakeRect(50, 200, 350, 300)];
+    GuaInput *input = [GuaInput newWithFrame:GuaMakeRect(50, 200, 300, 200)];
     [root addSubView:input];
 
     w.rootView = root;

@@ -24,7 +24,7 @@ GuaMainView ()
 
 - (void)update {
     for (GuaView *e in self.elements) {
-        [e draw];
+        [e update];
     }
 }
 
@@ -46,4 +46,9 @@ GuaMainView ()
     }
 }
 
+- (void)textInputEvent:(SDL_Event *)event {
+    for (GuaView *view in self.elements) {
+        [view textInputEvent:event];
+    }
+}
 @end
