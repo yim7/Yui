@@ -1,13 +1,13 @@
-#import "GuaColor.h"
-#import "GuaGeometry.h"
+#import "YuiColor.h"
+#import "YuiGeometry.h"
 #import "SDL2/SDL.h"
 #import <Foundation/Foundation.h>
 
-@interface GuaView : NSObject
+@interface YuiView : NSObject
 
-@property GuaRect frame;
+@property YuiRect frame;
 
-+ (instancetype)newWithFrame:(GuaRect)frame;
++ (instancetype)newWithFrame:(YuiRect)frame;
 
 // 这个子类必须覆盖实现
 - (void)setup;
@@ -22,8 +22,8 @@
 
 - (void)textInputEvent:(SDL_Event *)event;
 
-- (void)drawRect:(GuaRect)rect;
+- (void)drawRect:(YuiRect)rect;
 
-- (void)drawRect:(GuaRect)rect color:(GuaColor)color;
+- (void)drawRect:(YuiRect)rect color:(YuiColor)color;
 
 @end

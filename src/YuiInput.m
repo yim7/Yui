@@ -1,30 +1,30 @@
-#import "GuaInput.h"
-#import "GuaApp.h"
-#import "GuaLabel.h"
-#import "GuaWindow.h"
+#import "YuiInput.h"
+#import "YuiApp.h"
+#import "YuiLabel.h"
+#import "YuiWindow.h"
 #import "SDL2_ttf/SDL_ttf.h"
 #include <stdio.h>
 
 @interface
-GuaInput ()
+YuiInput ()
 
 @property BOOL focus;
-@property GuaColor textColor;
-@property GuaColor backgroundColor;
+@property YuiColor textColor;
+@property YuiColor backgroundColor;
 @property NSString *text;
 @property TTF_Font *font;
 @property SDL_Texture *texture;
-@property GuaRect textFrame;
+@property YuiRect textFrame;
 
 @end
 
-@implementation GuaInput
+@implementation YuiInput
 - (void)setup {
     _focus = NO;
-    _textColor = GuaMakeColor(0, 0, 0, 255);
-    _backgroundColor = GuaMakeColor(255, 255, 255, 255);
+    _textColor = YuiMakeColor(0, 0, 0, 255);
+    _backgroundColor = YuiMakeColor(255, 255, 255, 255);
     _text = [NSMutableString new];
-    _textFrame = GuaMakeRect(self.frame.x, self.frame.y, 0, 0);
+    _textFrame = YuiMakeRect(self.frame.x, self.frame.y, 0, 0);
 
     // 加载字体
     _font = TTF_OpenFont("../assets/wqy-microhei.ttc", 27);
@@ -38,16 +38,16 @@ GuaInput ()
     const char *text = self.text.UTF8String;
     // NSLog(@"input text: <%s>", text);
     // 绘制字体，surface 转 texture 是画字体的套路
-    GuaRect frame = self.frame;
+    YuiRect frame = self.frame;
     SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(self.font, text, self.textColor, frame.w);
     // NSLog(@"input text surface222222: <%p>, error %s", surface, SDL_GetError());
     if (!surface) {
-        self.textFrame = GuaMakeRect(frame.x, frame.y, 0, 0);
+        self.textFrame = YuiMakeRect(frame.x, frame.y, 0, 0);
         self.texture = nil;
         return;
     }
-    self.textFrame = GuaMakeRect(frame.x, frame.y, surface->w, surface->h);
-    GuaApp *app = [GuaApp sharedApp];
+    self.textFrame = YuiMakeRect(frame.x, frame.y, surface->w, surface->h);
+    YuiApp *app = [YuiApp sharedApp];
     SDL_Texture *texture = SDL_CreateTextureFromSurface(app.renderer, surface);
     if (!texture) {
         NSLog(@"TTF Texture Failed: %s\n", SDL_GetError());
@@ -58,12 +58,12 @@ GuaInput ()
 }
 
 - (void)draw {
-    GuaApp *app = [GuaApp sharedApp];
+    YuiApp *app = [YuiApp sharedApp];
     // draw 输入框背景
     [self drawRect:self.frame color:self.backgroundColor];
     // draw 输入的文字
-    GuaRect r = self.textFrame;
-    // NSLog(@"gua label draw, %d %d %d %d", r.x, r.y, r.w, r.h);
+    YuiRect r = self.textFrame;
+    // NSLog(@"Yui label draw, %d %d %d %d", r.x, r.y, r.w, r.h);
     // renderer, texture，复制区域（NULL 表示是全部），复制到哪个地方
     SDL_RenderCopy(app.renderer, self.texture, NULL, &r);
 
@@ -72,14 +72,14 @@ GuaInput ()
         NSString *line = [lines lastObject];
         int w = 0;
         TTF_SizeUTF8(self.font, line.UTF8String, &w, NULL);
-        GuaRect textFrame = self.textFrame;
-        GuaRect rect;
+        YuiRect textFrame = self.textFrame;
+        YuiRect rect;
         if (w) {
-            rect = GuaMakeRect(textFrame.x + w, textFrame.y + textFrame.h - 30, 5, 30);
+            rect = YuiMakeRect(textFrame.x + w, textFrame.y + textFrame.h - 30, 5, 30);
         } else {
-            rect = GuaMakeRect(textFrame.x + w, textFrame.y + textFrame.h, 5, 30);
+            rect = YuiMakeRect(textFrame.x + w, textFrame.y + textFrame.h, 5, 30);
         }
-        GuaColor color = GuaMakeColor(10, 10, 10, 100);
+        YuiColor color = YuiMakeColor(10, 10, 10, 100);
         int time = SDL_GetTicks();
         if (time / 500 % 2) {
             [self drawRect:rect color:color];
@@ -92,7 +92,7 @@ GuaInput ()
     if (t == SDL_MOUSEBUTTONDOWN) {
         int x = event->button.x;
         int y = event->button.y;
-        GuaPoint p = GuaMakePoint(x, y);
+        YuiPoint p = YuiMakePoint(x, y);
         // 鼠标在按键上才允许点击
         if (pointInRect(p, self.frame)) {
             self.focus = YES;

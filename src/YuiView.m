@@ -1,19 +1,19 @@
-#import "GuaView.h"
-#import "GuaApp.h"
-#import "GuaGeometry.h"
-#import "GuaWindow.h"
+#import "YuiView.h"
+#import "YuiApp.h"
+#import "YuiGeometry.h"
+#import "YuiWindow.h"
 
 @interface
-GuaView ()
+YuiView ()
 
 @end
 
-@implementation GuaView
-+ (instancetype)newWithFrame:(GuaRect)frame {
+@implementation YuiView
++ (instancetype)newWithFrame:(YuiRect)frame {
     return [[self alloc] initWithFrame:frame];
 }
 
-- (instancetype)initWithFrame:(GuaRect)frame {
+- (instancetype)initWithFrame:(YuiRect)frame {
     self = [super init];
     if (self) {
         _frame = frame;
@@ -52,13 +52,13 @@ GuaView ()
     
 }
 
-- (void)drawRect:(GuaRect)rect {
-    GuaApp *app = [GuaApp sharedApp];
+- (void)drawRect:(YuiRect)rect {
+    YuiApp *app = [YuiApp sharedApp];
     SDL_RenderFillRect(app.renderer, &rect);
 }
 
-- (void)drawRect:(GuaRect)rect color:(GuaColor)color {
-    GuaApp *app = [GuaApp sharedApp];
+- (void)drawRect:(YuiRect)rect color:(YuiColor)color {
+    YuiApp *app = [YuiApp sharedApp];
     SDL_SetRenderDrawColor(app.renderer, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(app.renderer, &rect);
 }

@@ -1,53 +1,53 @@
-#import "GuaMainView.h"
-#import "GuaApp.h"
-#import "GuaView.h"
-#import "GuaWindow.h"
+#import "YuiMainView.h"
+#import "YuiApp.h"
+#import "YuiView.h"
+#import "YuiWindow.h"
 #import "SDL2/SDL.h"
 #import "SDL2_ttf/SDL_ttf.h"
 
 @interface
-GuaMainView ()
+YuiMainView ()
 
 @property NSMutableArray *elements;
 
 @end
 
-@implementation GuaMainView
+@implementation YuiMainView
 - (void)setup {
     self.elements = [NSMutableArray new];
 }
 
-- (void)addSubView:(GuaView *)view {
+- (void)addSubView:(YuiView *)view {
     [self.elements addObject:(id)view];
     NSLog(@"Main View add subview %@", view);
 }
 
 - (void)update {
-    for (GuaView *e in self.elements) {
+    for (YuiView *e in self.elements) {
         [e update];
     }
 }
 
 - (void)draw {
-    for (GuaView *e in self.elements) {
+    for (YuiView *e in self.elements) {
         [e draw];
     }
 }
 
 - (void)mouseEvent:(SDL_Event *)event {
-    for (GuaView *view in self.elements) {
+    for (YuiView *view in self.elements) {
         [view mouseEvent:event];
     }
 }
 
 - (void)keyboardEvent:(SDL_Event *)event {
-    for (GuaView *view in self.elements) {
+    for (YuiView *view in self.elements) {
         [view keyboardEvent:event];
     }
 }
 
 - (void)textInputEvent:(SDL_Event *)event {
-    for (GuaView *view in self.elements) {
+    for (YuiView *view in self.elements) {
         [view textInputEvent:event];
     }
 }

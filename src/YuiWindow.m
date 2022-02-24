@@ -1,26 +1,26 @@
-#import "GuaWindow.h"
-#import "GuaApp.h"
-#import "GuaGeometry.h"
+#import "YuiWindow.h"
+#import "YuiApp.h"
+#import "YuiGeometry.h"
 #import "SDL2/SDL.h"
 #import "SDL2_ttf/SDL_ttf.h"
 
 // 这是 extension 语法
 // 用来定义一些内部属性和方法，只能在本文件中可见
 @interface
-GuaWindow ()
+YuiWindow ()
 
 @property SDL_Window *window;
 @property BOOL quit;
 
 @end
 
-@implementation GuaWindow
-+ (instancetype)newWithTitle:(NSString *)title frame:(GuaRect)frame {
+@implementation YuiWindow
++ (instancetype)newWithTitle:(NSString *)title frame:(YuiRect)frame {
     // self 表示接收消息的对象，这是类方法，所以 self 就是类
     return [[self alloc] initWithTitle:title frame:frame];
 }
 
-- (instancetype)initWithTitle:(NSString *)title frame:(GuaRect)frame {
+- (instancetype)initWithTitle:(NSString *)title frame:(YuiRect)frame {
     self = [super init];
     if (self) {
         // @property NSString *title 生成的实际成员变量名是 _title
@@ -36,8 +36,8 @@ GuaWindow ()
 - (void)initApp {
     [self initSDL];
 
-    // init GuaApp
-    GuaApp *app = [GuaApp sharedApp];
+    // init YuiApp
+    YuiApp *app = [YuiApp sharedApp];
     app.window = self;
     app.renderer = self.renderer;
 }

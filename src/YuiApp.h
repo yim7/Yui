@@ -1,9 +1,9 @@
-#import "GuaWindow.h"
+#import "YuiWindow.h"
 #import <Foundation/Foundation.h>
 
-@interface GuaApp : NSObject
+@interface YuiApp : NSObject
 
-@property GuaWindow *window;
+@property YuiWindow *window;
 @property SDL_Renderer *renderer;
 
 + (instancetype)sharedApp;
